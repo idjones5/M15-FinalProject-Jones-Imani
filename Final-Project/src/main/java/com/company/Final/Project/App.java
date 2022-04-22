@@ -207,7 +207,7 @@ public class App {
                         case 4:
                             System.out.println("Current crypto prices");
                             System.out.println("======================");
-                            System.out.println("Enter the symbol a cryptocurrency (ex: BTC or ETH)");
+                            System.out.println("Enter the symbol of a cryptocurrency (ex: BTC or ETH)");
 
                             try {
 

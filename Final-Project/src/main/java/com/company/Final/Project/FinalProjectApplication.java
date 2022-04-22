@@ -1,10 +1,22 @@
 package com.company.Final.Project;
 
+import com.company.Final.Project.apiCalls.IssAPI;
+import com.company.Final.Project.apiCalls.OpenWeatherAPI;
 import com.company.Final.Project.coin.Coin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+import static com.company.Final.Project.apiCalls.OpenWeatherAPI.openWeather;
+import static com.company.Final.Project.apiCalls.IssAPI.issAPI;
+import static com.company.Final.Project.apiCalls.IssOpenWeatherAPIs.issWeatherConditions;
+import static com.company.Final.Project.apiCalls.CoinAPI.cryptoPrices;
 
 @SpringBootApplication
 public class FinalProjectApplication {
@@ -12,27 +24,10 @@ public class FinalProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectApplication.class, args);
 
-		//Scanner scan = new Scanner(System.in); // take user input from the scanner to search for the location etc
-		//String userInput = scan.nextLine();
-
-		//String userLocation = userInput; // location needs to be in the format London,uk
-
-		//WebClient client = WebClient.create("http://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&APPID=fd238fddcae5fb3172123f01221a835d"); // city location
-		WebClient client1 = WebClient.create("https://rest.coinapi.io/v1/assets/BTC?apikey=A59F836C-9CE3-4105-9DFB-3D489691575B"); // coin price - logged at BTC rn
-		WebClient client2 = WebClient.create("http://api.open-notify.org/iss-now.json?callback"); // iss location
-
-		WebClient client3 = WebClient.create("https://api.openweathermap.org/data/2.5/weather?lat=22.0554&lon=-28.8485&appid=fd238fddcae5fb3172123f01221a835d"); // lat and long
-
-
-		Mono<Coin[]> response = client1
-				.get()
-				.retrieve()
-				.bodyToMono(Coin[].class);
-
-		Coin[] coin = response.share().block();
-
-
-		System.out.println(coin[0].getAsset_id());
+		Set<Integer> menuChoicesSet = new HashSet<Integer>(Arrays.asList(1,2,3,4,5));
+		Scanner scan = new Scanner(System.in);
+		String userInput;
+		int userChoice;
 
 		System.out.println("===========================================");
 		System.out.println("Welcome. Please select from the menu below");
@@ -44,11 +39,74 @@ public class FinalProjectApplication {
 		System.out.println("4 - Current Cryptocurrency Prices");
 		System.out.println("5 - Exit");
 
+			try {
 
+				do {
+					userInput = scan.nextLine();
+					userChoice = Integer.parseInt(userInput);
 
+					if (menuChoicesSet.contains(userChoice)) {
 
+						switch (userChoice) {
+							case 1:
+								System.out.println(" Weather in a city");
+								System.out.println("===================");
+								System.out.println("What city would you like to find the weather for?");
 
+								userInput = scan.nextLine();
+								openWeather(userInput);
 
+								menuOptionMessage();
+								break;
+							case 2:
+
+								System.out.println("Location of ISS");
+								System.out.println("===================");
+
+								issAPI();
+
+								menuOptionMessage();
+								break;
+							case 3:
+								System.out.println("Weather in location of ISS");
+								System.out.println("===========================");
+
+								issWeatherConditions();
+
+								menuOptionMessage();
+								break;
+							case 4:
+								System.out.println("Current crypto prices");
+								System.out.println("======================");
+								System.out.println("Enter the symbol of a cryptocurrency (ex: BTC or ETH)");
+
+								userInput = scan.nextLine();
+
+								cryptoPrices(userInput);
+
+								menuOptionMessage();
+								break;
+							case 5:
+								System.out.println("Goodbye.");
+								break;
+							default:
+								System.out.println("Please enter a valid option.");
+								break;
+						}
+					} else {
+						System.out.println("Error. Please enter a valid menu option.");
+					}
+				}	while (userChoice != 5);
+			} catch (NumberFormatException ne) {
+				System.out.println("Please enter a valid number.");
+			} catch (Exception exception) {
+				System.out.println("An error has occurred.");
+			}
+
+	}
+
+	public static void menuOptionMessage() {
+		System.out.println("\n" + "Enter a menu selection or press 5 to exit.");
 	}
 
 }

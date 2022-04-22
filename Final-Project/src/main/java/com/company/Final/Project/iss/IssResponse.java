@@ -7,6 +7,7 @@ public class IssResponse {
     @JsonProperty("iss_position")
     private IssPosition iss_position;
     private String timestamp;
+    private String message;
 
 
     public IssPosition getIssPosition() {
@@ -15,5 +16,9 @@ public class IssResponse {
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
