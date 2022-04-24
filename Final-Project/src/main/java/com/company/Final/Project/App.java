@@ -1,8 +1,7 @@
 package com.company.Final.Project;
 
-import com.company.Final.Project.coin.Coin;
-import com.company.Final.Project.iss.IssResponse;
-import com.company.Final.Project.weather.Weather;
+import com.company.Final.Project.coin.CryptoResponse;
+import com.company.Final.Project.iss.SpaceResponse;
 import com.company.Final.Project.weather.WeatherResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -12,8 +11,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class App {
 
@@ -116,12 +113,12 @@ public class App {
 
                                 WebClient client = WebClient.create("http://api.open-notify.org/iss-now.json?callback");
 
-                                Mono<IssResponse> issResponse = client
+                                Mono<SpaceResponse> issResponse = client
                                         .get()
                                         .retrieve()
-                                        .bodyToMono(IssResponse.class);
+                                        .bodyToMono(SpaceResponse.class);
 
-                                IssResponse iss = issResponse.share().block();
+                                SpaceResponse iss = issResponse.share().block();
 
                                 issLat = iss.getIssPosition().getLatitude();
                                 issLong = iss.getIssPosition().getLongitude();
@@ -170,12 +167,12 @@ public class App {
 
                                 WebClient client = WebClient.create("http://api.open-notify.org/iss-now.json?callback");
 
-                                Mono<IssResponse> issResponse = client
+                                Mono<SpaceResponse> issResponse = client
                                         .get()
                                         .retrieve()
-                                        .bodyToMono(IssResponse.class);
+                                        .bodyToMono(SpaceResponse.class);
 
-                                IssResponse iss = issResponse.share().block();
+                                SpaceResponse iss = issResponse.share().block();
 
                                 issLat = iss.getIssPosition().getLatitude();
                                 issLong = iss.getIssPosition().getLongitude();
@@ -221,16 +218,16 @@ public class App {
                                 WebClient client = WebClient.create("https://rest.coinapi.io/v1/assets/"
                                         + userCryptoSymbol + "?apikey=A59F836C-9CE3-4105-9DFB-3D489691575B");
 
-                                Mono<Coin[]> response = client
+                                Mono<CryptoResponse[]> response = client
                                         .get()
                                         .retrieve()
-                                        .bodyToMono(Coin[].class);
+                                        .bodyToMono(CryptoResponse[].class);
 
-                                Coin[] coin = response.share().block();
+                                CryptoResponse[] cryptoResponse = response.share().block();
 
-                                cryptoSymbol = coin[0].getAsset_id();
-                                cryptoName = coin[0].getName();
-                                cryptoCurrentPrice = Double.valueOf(coin[0].getPrice_usd());
+                                cryptoSymbol = cryptoResponse[0].getAsset_id();
+                                cryptoName = cryptoResponse[0].getName();
+                                cryptoCurrentPrice = Double.valueOf(cryptoResponse[0].getPrice_usd());
 
                                 System.out.println(cryptoSymbol);
                                 System.out.println("=============");

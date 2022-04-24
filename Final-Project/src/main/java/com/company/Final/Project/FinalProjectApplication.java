@@ -1,12 +1,7 @@
 package com.company.Final.Project;
 
-import com.company.Final.Project.apiCalls.IssAPI;
-import com.company.Final.Project.apiCalls.OpenWeatherAPI;
-import com.company.Final.Project.coin.Coin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,7 +47,6 @@ public class FinalProjectApplication {
 								System.out.println(" Weather in a city");
 								System.out.println("===================");
 								System.out.println("What city would you like to find the weather for?");
-
 								userInput = scan.nextLine();
 								openWeather(userInput);
 
@@ -62,7 +56,6 @@ public class FinalProjectApplication {
 
 								System.out.println("Location of ISS");
 								System.out.println("===================");
-
 								issAPI();
 
 								menuOptionMessage();
@@ -70,7 +63,6 @@ public class FinalProjectApplication {
 							case 3:
 								System.out.println("Weather in location of ISS");
 								System.out.println("===========================");
-
 								issWeatherConditions();
 
 								menuOptionMessage();
@@ -79,9 +71,7 @@ public class FinalProjectApplication {
 								System.out.println("Current crypto prices");
 								System.out.println("======================");
 								System.out.println("Enter the symbol of a cryptocurrency (ex: BTC or ETH)");
-
 								userInput = scan.nextLine();
-
 								cryptoPrices(userInput);
 
 								menuOptionMessage();

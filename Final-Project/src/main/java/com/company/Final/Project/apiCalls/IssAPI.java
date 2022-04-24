@@ -1,7 +1,7 @@
 package com.company.Final.Project.apiCalls;
 
 import com.company.Final.Project.exceptions.WebExceptions;
-import com.company.Final.Project.iss.IssResponse;
+import com.company.Final.Project.iss.SpaceResponse;
 import com.company.Final.Project.weather.WeatherResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -20,12 +20,12 @@ public class IssAPI {
 
             WebClient client = WebClient.create("http://api.open-notify.org/iss-now.json?callback");
 
-            Mono<IssResponse> issResponse = client
+            Mono<SpaceResponse> issResponse = client
                     .get()
                     .retrieve()
-                    .bodyToMono(IssResponse.class);
+                    .bodyToMono(SpaceResponse.class);
 
-            IssResponse iss = issResponse.share().block();
+            SpaceResponse iss = issResponse.share().block();
 
             issLat = iss.getIssPosition().getLatitude();
             issLong = iss.getIssPosition().getLongitude();

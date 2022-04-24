@@ -2,7 +2,7 @@ package com.company.Final.Project.iss;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class IssResponse {
+public class SpaceResponse {
 
     @JsonProperty("iss_position")
     private IssPosition iss_position;

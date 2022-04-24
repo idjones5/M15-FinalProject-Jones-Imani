@@ -1,6 +1,6 @@
 package com.company.Final.Project.apiCalls;
 
-import com.company.Final.Project.coin.Coin;
+import com.company.Final.Project.coin.CryptoResponse;
 import com.company.Final.Project.exceptions.WebExceptions;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -21,16 +21,16 @@ public class CoinAPI {
             WebClient client = WebClient.create("https://rest.coinapi.io/v1/assets/"
                     + userCryptoSymbol + "?apikey=A59F836C-9CE3-4105-9DFB-3D489691575B");
 
-            Mono<Coin[]> response = client
+            Mono<CryptoResponse[]> response = client
                     .get()
                     .retrieve()
-                    .bodyToMono(Coin[].class);
+                    .bodyToMono(CryptoResponse[].class);
 
-            Coin[] coin = response.share().block();
+            CryptoResponse[] cryptoResponse = response.share().block();
 
-            cryptoSymbol = coin[0].getAsset_id();
-            cryptoName = coin[0].getName();
-            cryptoCurrentPrice = Double.valueOf(coin[0].getPrice_usd());
+            cryptoSymbol = cryptoResponse[0].getAsset_id();
+            cryptoName = cryptoResponse[0].getName();
+            cryptoCurrentPrice = Double.valueOf(cryptoResponse[0].getPrice_usd());
 
             System.out.println("\n" + cryptoSymbol);
             System.out.println("=============");

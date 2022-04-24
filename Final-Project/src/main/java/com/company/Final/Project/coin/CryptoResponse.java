@@ -2,7 +2,7 @@ package com.company.Final.Project.coin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Coin {
+public class CryptoResponse {
 
     @JsonProperty("asset_id")
     private String asset_id;
