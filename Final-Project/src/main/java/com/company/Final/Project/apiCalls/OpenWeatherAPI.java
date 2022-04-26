@@ -8,16 +8,17 @@ import reactor.core.publisher.Mono;
 
 public class OpenWeatherAPI {
 
-
     // method to call the open weather API
-
+    // also controls the response of a call
+    // returns the weather at a location (userInput from Scanner)
 
     public static void openWeather(String userInput) {
 
        try {
            String userLocation = userInput;
 
-           WebClient client = WebClient.create("http://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&APPID=fd238fddcae5fb3172123f01221a835d");
+           WebClient client = WebClient.create("http://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&APPID=fd238fddcae5fb3172123f01221a835d"
+           + "&units=imperial");
 
            Mono<WeatherResponse> weatherResponse = client
                    .get()
@@ -30,10 +31,15 @@ public class OpenWeatherAPI {
                    .getWeather()
                    .stream()
                    .forEach(weather -> {
-                       System.out.println("The weather for " + userLocation + " right now looks like " + weather.getMain()
-                               + " with " + weather.getDescription());
+                       System.out.println("\n" + "Weather ");
+                       System.out.println("===================");
+                       System.out.println("Location: " + userLocation);
+                       System.out.println("Main Weather: " + weather.getMain());
+                       System.out.println("Detail: " + weather.getDescription());
+                       System.out.println("Temperature: " + weatherAtLocation.getMain().getTemp() + " °F");
+                       System.out.println("Feels like: " + weatherAtLocation.getMain().getFeels_like() + " °F");
+                       System.out.println("===================");
                    });
-
 
        }
        catch (WebClientResponseException.NotFound notFound) {

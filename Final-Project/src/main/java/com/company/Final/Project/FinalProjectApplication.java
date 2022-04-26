@@ -19,10 +19,10 @@ public class FinalProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectApplication.class, args);
 
-		Set<Integer> menuChoicesSet = new HashSet<Integer>(Arrays.asList(1,2,3,4,5));
+		Set<Integer> menuChoicesSet = new HashSet<Integer>(Arrays.asList(1,2,3,4,5,6));
 		Scanner scan = new Scanner(System.in);
 		String userInput;
-		int userChoice;
+		int userChoice = 0;
 
 		System.out.println("===========================================");
 		System.out.println("Welcome. Please select from the menu below");
@@ -34,9 +34,9 @@ public class FinalProjectApplication {
 		System.out.println("4 - Current Cryptocurrency Prices");
 		System.out.println("5 - Exit");
 
+		do {
 			try {
 
-				do {
 					userInput = scan.nextLine();
 					userChoice = Integer.parseInt(userInput);
 
@@ -44,6 +44,7 @@ public class FinalProjectApplication {
 
 						switch (userChoice) {
 							case 1:
+								System.out.println("===================");
 								System.out.println(" Weather in a city");
 								System.out.println("===================");
 								System.out.println("What city would you like to find the weather for?");
@@ -53,7 +54,7 @@ public class FinalProjectApplication {
 								menuOptionMessage();
 								break;
 							case 2:
-
+								System.out.println("===================");
 								System.out.println("Location of ISS");
 								System.out.println("===================");
 								issAPI();
@@ -61,6 +62,7 @@ public class FinalProjectApplication {
 								menuOptionMessage();
 								break;
 							case 3:
+								System.out.println("===========================");
 								System.out.println("Weather in location of ISS");
 								System.out.println("===========================");
 								issWeatherConditions();
@@ -68,6 +70,7 @@ public class FinalProjectApplication {
 								menuOptionMessage();
 								break;
 							case 4:
+								System.out.println("======================");
 								System.out.println("Current crypto prices");
 								System.out.println("======================");
 								System.out.println("Enter the symbol of a cryptocurrency (ex: BTC or ETH)");
@@ -79,6 +82,9 @@ public class FinalProjectApplication {
 							case 5:
 								System.out.println("Goodbye.");
 								break;
+							case 6:
+								menuSelection();
+								break;
 							default:
 								System.out.println("Please enter a valid option.");
 								break;
@@ -86,17 +92,29 @@ public class FinalProjectApplication {
 					} else {
 						System.out.println("Error. Please enter a valid menu option.");
 					}
-				}	while (userChoice != 5);
+
 			} catch (NumberFormatException ne) {
 				System.out.println("Please enter a valid number.");
 			} catch (Exception exception) {
 				System.out.println("An error has occurred.");
 			}
-
+		} while (userChoice != 5);
 	}
 
 	public static void menuOptionMessage() {
-		System.out.println("\n" + "Enter a menu selection or press 5 to exit.");
+		System.out.println("\n" + "Enter a menu selection.");
+		System.out.println("===========================");
+		System.out.println("Press 5 to exit.");
+		System.out.println("Press 6 to view the menu options again.");
+		System.out.println("===========================");
+	}
+
+	public static void menuSelection() {
+		System.out.println("1 - Weather in a city");
+		System.out.println("2 - Location of the International Space Station (ISS)");
+		System.out.println("3 - Weather in the Location of the ISS");
+		System.out.println("4 - Current Cryptocurrency Prices");
+		System.out.println("5 - Exit");
 	}
 
 }

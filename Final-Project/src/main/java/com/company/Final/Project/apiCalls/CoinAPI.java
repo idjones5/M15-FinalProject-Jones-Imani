@@ -8,6 +8,10 @@ import reactor.core.publisher.Mono;
 
 public class CoinAPI {
 
+    // method to call the coin API
+    // also controls the response of a call
+    // returns the symbol, currency name, and current price in USD
+
     public static void cryptoPrices(String userInput) {
 
         try {
@@ -40,10 +44,17 @@ public class CoinAPI {
             System.out.println("=============");
         }
         catch (WebClientResponseException we) {
+
             WebExceptions.catchException(we);
+
+            int statusCode = we.getRawStatusCode();
+
+            if (statusCode == 550) {
+                System.out.println("There is currently no data on this item.");
+            }
         }
         catch (Exception exception) {
-            System.out.println("An Error has occurred " + exception.getMessage());
+            System.out.println("Currency not found. Please try again.");
         }
     }
 }

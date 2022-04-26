@@ -9,6 +9,10 @@ import reactor.core.publisher.Mono;
 
 public class IssAPI {
 
+    // method to call the ISS API
+    // also controls the response of a call
+    // returns the coordinates, country, and city if applicable
+
     public static void issAPI() {
 
         try {
@@ -24,7 +28,6 @@ public class IssAPI {
                     .get()
                     .retrieve()
                     .bodyToMono(SpaceResponse.class);
-
             SpaceResponse iss = issResponse.share().block();
 
             issLat = iss.getIssPosition().getLatitude();
@@ -37,23 +40,35 @@ public class IssAPI {
                     .get()
                     .retrieve()
                     .bodyToMono(WeatherResponse.class);
-
             WeatherResponse weatherAtLocation = weatherResponse.share().block();
 
             if (weatherAtLocation.getSys().getCountry() == null) {
 
-                System.out.println("The Space Station is not currently in a country.");
-                System.out.println("It's Latitude is " + issLat + " and it's Longitude is " + issLong);
+                System.out.println("Below is a summary of the latitude, longitude" +
+                        ", and country at the current location of the" +
+                        " International Space Station.");
+
+                System.out.println("===================");
+                System.out.println("Latitude: " + issLat + "°");
+                System.out.println("Longitude: " + issLong + "°");
+                System.out.println("Country: The Space Station is not currently in a country.");
+                System.out.println("===================");
             } else  {
 
                 issCountry = weatherAtLocation.getSys().getCountry();
                 issCity = weatherAtLocation.getName();
 
-                System.out.println("The International Space Station currently has a latitude of "
-                        + issLat + " and a longitude of " + issLong +
-                        " and is currently in the country of " + issCountry + " and the city " + issCity);
-            }
+                System.out.println("Below is a summary of the latitude, longitude" +
+                        ", country, and city at the current location of the" +
+                        " International Space Station.");
 
+                System.out.println("===================");
+                System.out.println("Latitude: " + issLat + "°");
+                System.out.println("Longitude: " + issLong + "°");
+                System.out.println("Country: " + issCountry);
+                System.out.println("City: " + issCity);
+                System.out.println("===================");
+            }
         }
         catch (WebClientResponseException we) {
             WebExceptions.catchException(we);
