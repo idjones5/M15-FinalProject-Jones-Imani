@@ -28,11 +28,7 @@ public class FinalProjectApplication {
 		System.out.println("Welcome. Please select from the menu below");
 		System.out.println("===========================================");
 
-		System.out.println("1 - Weather in a city");
-		System.out.println("2 - Location of the International Space Station (ISS)");
-		System.out.println("3 - Weather in the Location of the ISS");
-		System.out.println("4 - Current Cryptocurrency Prices");
-		System.out.println("5 - Exit");
+		menuSelection();
 
 		do {
 			try {
@@ -102,8 +98,9 @@ public class FinalProjectApplication {
 	}
 
 	public static void menuOptionMessage() {
-		System.out.println("\n" + "Enter a menu selection.");
+		System.out.println("\n" + "Enter a menu selection. ");
 		System.out.println("===========================");
+		System.out.println("You can also: ");
 		System.out.println("Press 5 to exit.");
 		System.out.println("Press 6 to view the menu options again.");
 		System.out.println("===========================");

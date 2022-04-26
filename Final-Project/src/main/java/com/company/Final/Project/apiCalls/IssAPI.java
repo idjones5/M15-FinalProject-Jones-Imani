@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
+import static com.company.Final.Project.iss.SpaceResponse.issSummary;
+
 public class IssAPI {
 
     // method to call the ISS API
@@ -28,6 +30,7 @@ public class IssAPI {
                     .get()
                     .retrieve()
                     .bodyToMono(SpaceResponse.class);
+
             SpaceResponse iss = issResponse.share().block();
 
             issLat = iss.getIssPosition().getLatitude();
@@ -40,27 +43,25 @@ public class IssAPI {
                     .get()
                     .retrieve()
                     .bodyToMono(WeatherResponse.class);
+
             WeatherResponse weatherAtLocation = weatherResponse.share().block();
 
             if (weatherAtLocation.getSys().getCountry() == null) {
 
-                System.out.println("Below is a summary of the latitude, longitude" +
-                        ", and country at the current location of the" +
-                        " International Space Station.");
+                SpaceResponse.issSummary();
 
                 System.out.println("===================");
                 System.out.println("Latitude: " + issLat + "°");
                 System.out.println("Longitude: " + issLong + "°");
                 System.out.println("Country: The Space Station is not currently in a country.");
+                System.out.println("City: The Space Station is not currently in a city.");
                 System.out.println("===================");
             } else  {
 
                 issCountry = weatherAtLocation.getSys().getCountry();
                 issCity = weatherAtLocation.getName();
 
-                System.out.println("Below is a summary of the latitude, longitude" +
-                        ", country, and city at the current location of the" +
-                        " International Space Station.");
+                SpaceResponse.issSummary();
 
                 System.out.println("===================");
                 System.out.println("Latitude: " + issLat + "°");

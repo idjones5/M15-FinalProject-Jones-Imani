@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
+import static com.company.Final.Project.iss.SpaceResponse.issSummary;
+
 public class IssOpenWeatherAPIs {
 
     // method to call the ISS and open weather APIs
@@ -50,39 +52,37 @@ public class IssOpenWeatherAPIs {
 
             if (weatherAtLocation.getSys().getCountry() == null) {
 
-                System.out.println("Below is a summary of the latitude, longitude" +
-                        ", country, and weather at the current location of the" +
-                        " International Space Station.");
+                SpaceResponse.issSummary();
 
-                System.out.println("===================");
+                System.out.println("===========================");
                 System.out.println("Latitude: " + issLat + "°");
                 System.out.println("Longitude: " + issLong + "°");
                 System.out.println("Country: The Space Station is not currently in a country.");
+                System.out.println("City: The Space Station is not currently in a city.");
                 System.out.println("\n" + "Weather");
-                System.out.println("===================");
+                System.out.println("===========================");
                 System.out.println("Main Weather: " + mainWeather);
                 System.out.println("Detail: " + weatherDescription);
                 System.out.println("Temperature: " + weatherAtLocation.getMain().getTemp() + " °F");
-                System.out.println("===================");
+                System.out.println("===========================");
             } else  {
 
                 issCountry = weatherAtLocation.getSys().getCountry();
                 issCity = weatherAtLocation.getName();
 
-                System.out.println("Below is a summary of the latitude, longitude" +
-                        ", country, city, and weather at the current location of the" +
-                        " International Space Station.");
+                SpaceResponse.issSummary();
 
-                System.out.println("===================");
+                System.out.println("===========================");
                 System.out.println("Latitude: " + issLat + "°");
                 System.out.println("Longitude: " + issLong + "°");
                 System.out.println("Country: " + issCountry);
                 System.out.println("City: " + issCity);
                 System.out.println("\n" + "Weather");
-                System.out.println("===================");
+                System.out.println("===========================");
                 System.out.println("Main Weather: " + mainWeather);
                 System.out.println("Detail: " + weatherDescription);
-                System.out.println("===================");
+                System.out.println("Temperature: " + weatherAtLocation.getMain().getTemp() + " °F");
+                System.out.println("===========================");
             }
 
         }

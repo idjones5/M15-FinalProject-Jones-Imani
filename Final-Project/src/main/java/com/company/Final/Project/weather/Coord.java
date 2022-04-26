@@ -4,7 +4,7 @@ public class Coord {
 
     private String lon;
     private String lat;
-    
+
     public String getLon() {
         return lon;
     }

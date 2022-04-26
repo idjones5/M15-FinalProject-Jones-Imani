@@ -54,7 +54,7 @@ public class CoinAPI {
             }
         }
         catch (Exception exception) {
-            System.out.println("Currency not found. Please try again.");
+            System.out.println("Symbol not found. Please try again.");
         }
     }
 }
