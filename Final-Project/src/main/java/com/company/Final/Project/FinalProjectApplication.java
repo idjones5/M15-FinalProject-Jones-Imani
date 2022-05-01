@@ -1,10 +1,15 @@
 package com.company.Final.Project;
 
+import com.company.Final.Project.caching.CachedCoin;
+import com.company.Final.Project.caching.CachedWeather;
+import com.company.Final.Project.caching.CoinScheduler;
+import com.company.Final.Project.caching.WeatherScheduler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -20,6 +25,15 @@ public class FinalProjectApplication {
 		SpringApplication.run(FinalProjectApplication.class, args);
 
 		Set<Integer> menuChoicesSet = new HashSet<Integer>(Arrays.asList(1,2,3,4,5,6));
+		HashMap<String, CachedWeather> cachedWeather = new HashMap<>();
+		HashMap<String, CachedCoin> cachedCoin = new HashMap<>();
+
+		WeatherScheduler clearCachedWeather = new WeatherScheduler();
+		CoinScheduler clearCachedCoin = new CoinScheduler();
+
+		clearCachedWeather.clearMap(cachedWeather);
+		clearCachedCoin.clearMap(cachedCoin);
+
 		Scanner scan = new Scanner(System.in);
 		String userInput;
 		int userChoice = 0;
@@ -45,7 +59,13 @@ public class FinalProjectApplication {
 								System.out.println("===================");
 								System.out.println("What city would you like to find the weather for?");
 								userInput = scan.nextLine();
-								openWeather(userInput);
+								userInput = userInputStringFormat(userInput);
+
+								if (cachedWeather.containsKey(userInput)) {
+									System.out.println(cachedWeather.get(userInput));
+								} else {
+									openWeather(userInput, cachedWeather);
+								}
 
 								menuOptionMessage();
 								break;
@@ -71,7 +91,13 @@ public class FinalProjectApplication {
 								System.out.println("======================");
 								System.out.println("Enter the symbol of a cryptocurrency (ex: BTC or ETH)");
 								userInput = scan.nextLine();
-								cryptoPrices(userInput);
+								userInput = userInput.toUpperCase();
+
+								if (cachedCoin.containsKey(userInput)) {
+									System.out.println(cachedCoin.get(userInput));
+								} else {
+									cryptoPrices(userInput, cachedCoin);
+								}
 
 								menuOptionMessage();
 								break;
@@ -114,4 +140,22 @@ public class FinalProjectApplication {
 		System.out.println("5 - Exit");
 	}
 
+	public static String userInputStringFormat(String userInput) {
+		// method to convert the first letter of input to uppercase
+		// and the rest of the characters to lowercase
+		// this is to reduce possible redundancy of values in hashmap
+		// ex: if a user enters "london" and "London" the openWeatherAPI
+		// returns the same data
+
+		String[] userInputC;
+		String temp;
+
+		userInput = userInput.toLowerCase();
+		userInputC = userInput.split("");
+		userInputC[0] = userInputC[0].toUpperCase();
+		temp = String.join("", userInputC);
+		userInput = temp;
+
+		return userInput;
+	}
 }
