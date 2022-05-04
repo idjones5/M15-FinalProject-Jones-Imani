@@ -1,11 +1,11 @@
 
-#Weather, Space Station, and Cryptocurrency Tracker App
+# Weather, Space Station, and Cryptocurrency Tracker App
 
 
 <p>This is a command line application that will allow a user to interact with a menu to get requested information about the weather, International Space Station, 
 and cryptocurrency via input read from Java's Scanner class. </p>
 
-##Tech/Frameworks
+## Tech/Frameworks
 
 <p>Intellij Community Edition, Java 8, and Spring Boot (v. 2.6.7) with reactive web dependency were used to create this application.
 The following APIs were used to obtain the information used in this application: </p>
