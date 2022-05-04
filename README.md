@@ -20,16 +20,16 @@ The following APIs were used to obtain the information used in this application:
 
 This application presents the user with a menu and prompts them to enter one of the choices. As the user selects a choice they are able to retrieve information about the following:
 
-<ol>
-<li>Weather in a City</li>
-<li>Location of the International Space Station (ISS)</li>
-<li>Weather in the Location of the ISS</li>
-<li>Current Cryptocurrency Prices</li>
-</ol>
 
-### Further Information about the features
+1. [Weather in a City](https://github.com/idjones5/M15-FinalProject-Jones-Imani#1-weather-in-a-city) </br>
+2. [Location of the International Space Station (ISS)](https://github.com/idjones5/M15-FinalProject-Jones-Imani#2-location-of-the-international-space-station-iss) </br>
+3. [Weather in the Location of the ISS](https://github.com/idjones5/M15-FinalProject-Jones-Imani#3-weather-in-the-location-of-the-iss) </br>
+4. [Current Cryptocurrency Prices](https://github.com/idjones5/M15-FinalProject-Jones-Imani#4-current-cryptocurrency-prices) </br>
 
-#### 1. Weather in a City
+
+## Further Information about the features
+
+### Weather in a City
 <P>Allows the user to input a city and retrieve the current weather in that current location </p>
 
 <ol>
@@ -43,7 +43,7 @@ This application presents the user with a menu and prompts them to enter one of 
 </ol>
 </ol>
 
-#### 2. Location of the International Space Station (ISS)
+### Location of the International Space Station (ISS)
 <p>Provides information about the current location of the ISS.</p>
 
 <ol>
@@ -56,7 +56,7 @@ This application presents the user with a menu and prompts them to enter one of 
 </ol>
 </ol>
 
-#### 3. Weather in the location of the ISS
+### Weather in the location of the ISS
 <p>This option will return weather information at the
 current location of the ISS.</p>
 
@@ -69,7 +69,7 @@ current location of the ISS.</p>
 </ol>
 </ol>
 
-#### 4. Current Cryptocurrency Prices
+### Current Cryptocurrency Prices
 <p>Allows the user to input a crypto coin symbol and retrieve the current price of that coin in USD.</p>
 
 <ol>
