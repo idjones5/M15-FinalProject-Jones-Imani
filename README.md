@@ -29,7 +29,7 @@ This application presents the user with a menu and prompts them to enter one of 
 
 ### Further Information about the features
 
-#### Weather in a City
+#### 1. Weather in a City
 <P>Allows the user to input a city and retrieve the current weather in that current location </p>
 
 <ol>
@@ -43,7 +43,7 @@ This application presents the user with a menu and prompts them to enter one of 
 </ol>
 </ol>
 
-#### Location of the International Space Station (ISS)
+#### 2. Location of the International Space Station (ISS)
 <p>Provides information about the current location of the ISS.</p>
 
 <ol>
@@ -56,7 +56,7 @@ This application presents the user with a menu and prompts them to enter one of 
 </ol>
 </ol>
 
-#### Weather in the location of the ISS
+#### 3. Weather in the location of the ISS
 <p>This option will return weather information at the
 current location of the ISS.</p>
 
@@ -69,7 +69,7 @@ current location of the ISS.</p>
 </ol>
 </ol>
 
-#### Current Cryptocurrency Prices
+#### 4. Current Cryptocurrency Prices
 <p>Allows the user to input a crypto coin symbol and retrieve the current price of that coin in USD.</p>
 
 <ol>
