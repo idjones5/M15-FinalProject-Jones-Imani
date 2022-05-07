@@ -7,6 +7,8 @@ import java.util.Map;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+// scheduler to clear the CachedWeather map
+
 public class WeatherScheduler {
 
     private final ScheduledExecutorService scheduler =
@@ -20,7 +22,7 @@ public class WeatherScheduler {
             }
         };
         final ScheduledFuture<?> clearMapHandle =
-                scheduler.scheduleAtFixedRate(clearM, 60, 60, SECONDS);
+                scheduler.scheduleAtFixedRate(clearM, 60 * 60, 60, SECONDS);
         scheduler.schedule(new Runnable() {
             @Override
             public void run() {

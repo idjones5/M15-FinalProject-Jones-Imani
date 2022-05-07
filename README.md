@@ -86,7 +86,7 @@ current location of the ISS.</p>
 
 ### Caching
 <ol>
-<li>User input is stored in a hashmap to reduce the amount of calls to the APIs if the user enters a duplicate location or coin</li>
+<li> Recent Weather and Coin data is stored in a hashmap to reduce the amount of calls to the APIs if the user enters a duplicate location or coin</li>
 <li>A scheduler is set up to clear the maps every five minutes while the app is running</li>
 </ol>
 

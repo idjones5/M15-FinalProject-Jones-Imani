@@ -1,5 +1,7 @@
 package com.company.Final.Project.caching;
 
+// response of the weather data that is going to be stored
+
 public class CachedWeather {
 
     private String main;

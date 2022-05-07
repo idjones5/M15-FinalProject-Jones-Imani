@@ -8,6 +8,7 @@ import com.company.Final.Project.fileWriter.WeatherFile;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class FinalProjectApplication {
 		Set<Integer> menuChoicesSet = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
 		HashMap<String, CachedWeather> cachedWeather = new HashMap<>();
 		HashMap<String, CachedCoin> cachedCoin = new HashMap<>();
+		HashMap<Integer, String> filenamesWeather = new HashMap<>();
 
 		WeatherScheduler clearCachedWeather = new WeatherScheduler();
 		CoinScheduler clearCachedCoin = new CoinScheduler();
@@ -78,7 +80,7 @@ public class FinalProjectApplication {
 
 
 								if (mapSizeAfterWeather > mapSizeBeforeWeather) {
-									System.out.println("Would you like to store this data in a weatherData.csv" +
+									System.out.println("Would you like to store this data in a csv file" +
 											" \nfile on your computer? If so, press y. If no, press n.");
 
 									System.out.println("\nPlease note that the following data will " +
@@ -86,15 +88,19 @@ public class FinalProjectApplication {
 									System.out.println("============================================");
 									String toCSV = scan.nextLine();
 
-										if (toCSV.equals("y")) {
-											try {
-												weatherFile.getDataFromMap(cachedWeather.get(userInput), weatherFile);
-												System.out.println("This data was added to 'weatherData.csv'.");
+										if (toCSV.equals("y") && cachedWeather.containsKey(userInput)) {
+											WeatherFile.newCSVFile(userInput, scan, weatherFile, filenamesWeather,
+													cachedWeather
+											);
 
-											} catch (Exception e) {
-												System.out.println("An error occurred.");
-											}
-										} else if (toCSV.equals("n")){
+										} else if (toCSV.equals("y") && !cachedWeather.containsKey(userInput)) {
+											openWeather(userInput, cachedWeather);
+											WeatherFile.newCSVFile(userInput, scan, weatherFile, filenamesWeather,
+													cachedWeather
+											);
+
+										}
+										else if (toCSV.equals("n")){
 											System.out.println("Okay, thank you.");
 										} else {
 											System.out.println("Invalid.");
@@ -191,5 +197,23 @@ public class FinalProjectApplication {
 		userInput = temp;
 
 		return userInput;
+	}
+
+	public static void getDataForFile(CachedWeather userW, WeatherFile data, String userInput, String fileName) {
+
+		data.dataToCsv(
+				userW.getLocation(),
+				userW.getMain(),
+				userW.getDescription(),
+				userW.getTemperature(),
+				userW.getFeelsLike(),
+				fileName
+		);
+		try {
+			data.getCsWriter().flush();
+			data.getCsWriter().close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

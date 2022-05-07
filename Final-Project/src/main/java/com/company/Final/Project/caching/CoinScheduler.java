@@ -7,6 +7,8 @@ import java.util.concurrent.ScheduledFuture;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+// scheduler to clear the CachedCoin map
+
 public class CoinScheduler {
 
     private final ScheduledExecutorService scheduler =

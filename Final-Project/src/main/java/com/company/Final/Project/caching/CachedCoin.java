@@ -1,6 +1,6 @@
 package com.company.Final.Project.caching;
 
-import org.apache.logging.log4j.message.StringFormattedMessage;
+// response of the coin that is going to be stored
 
 public class CachedCoin {
 

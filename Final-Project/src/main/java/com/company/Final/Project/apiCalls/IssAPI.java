@@ -11,7 +11,7 @@ import static com.company.Final.Project.iss.SpaceResponse.issSummary;
 
 public class IssAPI {
 
-    // method to call the ISS API
+    // method to call the ISS API & weather API
     // also controls the response of a call
     // returns the coordinates, country, and city if applicable
 
