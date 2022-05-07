@@ -13,6 +13,7 @@ public class OpenWeatherAPI {
     // method to call the open weather API
     // also controls the response of a call
     // returns the weather at a location (userInput from Scanner)
+    // stores the data in the map provided for caching
 
     public static void openWeather(String userInput, Map<String, CachedWeather> map) {
 

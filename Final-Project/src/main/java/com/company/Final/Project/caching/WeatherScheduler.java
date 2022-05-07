@@ -10,7 +10,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class WeatherScheduler {
 
     private final ScheduledExecutorService scheduler =
-            Executors.newScheduledThreadPool(2);
+            Executors.newScheduledThreadPool(1);
 
     public void clearMap(Map<String, CachedWeather> map) {
         final Runnable clearM = new Runnable() {
@@ -27,6 +27,6 @@ public class WeatherScheduler {
                 clearMapHandle.cancel(true);
                 scheduler.shutdown();
             }
-        }, 60 * 5, SECONDS);
+        }, 60 * 60 * 2, SECONDS);
     }
 }

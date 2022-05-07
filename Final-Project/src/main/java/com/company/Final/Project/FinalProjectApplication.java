@@ -4,6 +4,7 @@ import com.company.Final.Project.caching.CachedCoin;
 import com.company.Final.Project.caching.CachedWeather;
 import com.company.Final.Project.caching.CoinScheduler;
 import com.company.Final.Project.caching.WeatherScheduler;
+import com.company.Final.Project.fileWriter.WeatherFile;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -24,7 +25,7 @@ public class FinalProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectApplication.class, args);
 
-		Set<Integer> menuChoicesSet = new HashSet<Integer>(Arrays.asList(1,2,3,4,5,6));
+		Set<Integer> menuChoicesSet = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
 		HashMap<String, CachedWeather> cachedWeather = new HashMap<>();
 		HashMap<String, CachedCoin> cachedCoin = new HashMap<>();
 
@@ -34,9 +35,14 @@ public class FinalProjectApplication {
 		clearCachedWeather.clearMap(cachedWeather);
 		clearCachedCoin.clearMap(cachedCoin);
 
+		WeatherFile weatherFile = new WeatherFile();
+
 		Scanner scan = new Scanner(System.in);
 		String userInput;
 		int userChoice = 0;
+
+		int mapSizeBeforeWeather = 0; // counts if retrieval is successful or if information is added to map
+		int mapSizeAfterWeather = 0; // keeps track of the size of the map
 
 		System.out.println("===========================================");
 		System.out.println("Welcome. Please select from the menu below");
@@ -60,11 +66,39 @@ public class FinalProjectApplication {
 								System.out.println("What city would you like to find the weather for?");
 								userInput = scan.nextLine();
 								userInput = userInputStringFormat(userInput);
+								mapSizeBeforeWeather = cachedWeather.size();
 
 								if (cachedWeather.containsKey(userInput)) {
 									System.out.println(cachedWeather.get(userInput));
+									mapSizeAfterWeather++;
 								} else {
 									openWeather(userInput, cachedWeather);
+									mapSizeAfterWeather = cachedWeather.size();
+								}
+
+
+								if (mapSizeAfterWeather > mapSizeBeforeWeather) {
+									System.out.println("Would you like to store this data in a weatherData.csv" +
+											" file on your computer? If so, press y. If no, press n");
+
+									System.out.println("\nPlease note that the following data will " +
+											"be added to the file if it already exists.");
+									System.out.println("============================================");
+									String toCSV = scan.nextLine();
+
+										if (toCSV.equals("y")) {
+											try {
+												weatherFile.getDataFromMap(cachedWeather.get(userInput), weatherFile);
+												System.out.println("This data was added to 'weatherData.csv'.");
+
+											} catch (Exception e) {
+												System.out.println("An error occurred.");
+											}
+										} else if (toCSV.equals("n")){
+											System.out.println("Okay, thank you.");
+										} else {
+											System.out.println("Invalid.");
+										}
 								}
 
 								menuOptionMessage();

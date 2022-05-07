@@ -13,6 +13,7 @@ public class CoinAPI {
     // method to call the coin API
     // also controls the response of a call
     // returns the symbol, currency name, and current price in USD
+    // stores the data in the map provided for caching
 
     public static void cryptoPrices(String userInput, Map<String, CachedCoin> map) {
 
