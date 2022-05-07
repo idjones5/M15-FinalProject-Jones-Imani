@@ -79,10 +79,10 @@ public class FinalProjectApplication {
 
 								if (mapSizeAfterWeather > mapSizeBeforeWeather) {
 									System.out.println("Would you like to store this data in a weatherData.csv" +
-											" file on your computer? If so, press y. If no, press n");
+											" \nfile on your computer? If so, press y. If no, press n.");
 
 									System.out.println("\nPlease note that the following data will " +
-											"be added to the file if it already exists.");
+											"\nbe added to the file if it already exists.");
 									System.out.println("============================================");
 									String toCSV = scan.nextLine();
 

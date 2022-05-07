@@ -82,12 +82,15 @@ current location of the ISS.</p>
 </ol>
 </ol>
 
-### Other Features
+## Other Features
 
+## Caching
 <ol>
-<li>Caching</li>
-<ol>
-<li> user input is stored in a hashmap to reduce the amount of calls to the APIs if the user enters a duplicate location or coin</li>
+<li>User input is stored in a hashmap to reduce the amount of calls to the APIs if the user enters a duplicate location or coin</li>
 <li>A scheduler is set up to clear the maps every five minutes while the app is running</li>
 </ol>
+
+## Store Data to Local File
+<ol>
+<li>Allows the user to store data from the weather response if they choose to do so.</li>
 </ol>
