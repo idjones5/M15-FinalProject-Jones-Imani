@@ -80,7 +80,7 @@ public class FinalProjectApplication {
 
 
 								if (mapSizeAfterWeather > mapSizeBeforeWeather) {
-									System.out.println("Would you like to store this data in a csv file" +
+									System.out.println("Would you like to store this data in a csv " +
 											" \nfile on your computer? If so, press y. If no, press n.");
 
 									System.out.println("\nPlease note that the following data will " +
