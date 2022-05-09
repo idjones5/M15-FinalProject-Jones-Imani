@@ -10,11 +10,9 @@ public class IssFile {
     private String country;
     private String city;
 
-    // method to create a new csv file
-    // this will store all the weather data from the locations the user requested
-    // this file will append the weather data to an already existing file or a new file
 
-    // data for the ISS file
+    // method that gets the data from UserI and converts preps it to store in file
+    // and the headers specific to this class created for file
 
     public static void getDataForFile(IssFile userI, String fileName) {
 
@@ -59,12 +57,10 @@ public class IssFile {
                 String choice = scan.nextLine();
 
                 if (choice.equals("y")) {
-
                     getDataForFile(map.get(1), filenames.get(1));
 
                     System.out.println("\n" + "Success.");
                 } else if (choice.equals("n")) {
-
                     System.out.println("What would you like to name your file?");
                     String newFileName = scan.nextLine();
 

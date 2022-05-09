@@ -93,20 +93,20 @@ public class FinalProjectApplication {
 
 									toCSV = csvMessage();
 
-										if (toCSV.equals("y") && cachedWeather.containsKey(userInput)) {
-											WeatherFile.newCSVFile(userInput, scan, filenamesWeather, cachedWeather);
+									if (toCSV.equals("y") && cachedWeather.containsKey(userInput)) {
+										WeatherFile.newCSVFile(userInput, scan, filenamesWeather, cachedWeather);
 
-										} else if (toCSV.equals("y") && !cachedWeather.containsKey(userInput)) {
-											openWeather(userInput, cachedWeather);
-											WeatherFile.newCSVFile(userInput, scan, filenamesWeather, cachedWeather);
+									} else if (toCSV.equals("y") && !cachedWeather.containsKey(userInput)) {
+										openWeather(userInput, cachedWeather);
+										WeatherFile.newCSVFile(userInput, scan, filenamesWeather, cachedWeather);
 
-										}
-										else if (toCSV.equals("n")){
-											System.out.println("Okay, thank you.");
-										} else {
-											System.out.println("Invalid.");
-										}
+									} else if (toCSV.equals("n")) {
+										System.out.println("Okay, thank you.");
+									} else {
+										System.out.println("Invalid.");
+									}
 								}
+
 
 								menuOptionMessage();
 								break;
@@ -118,7 +118,6 @@ public class FinalProjectApplication {
 
 								toCSV = csvMessage();
 
-
 								if (toCSV.equals("y") && !issFileData.isEmpty()) {
 									IssFile.newCSVFile(scan, filenamesISS, issFileData);
 
@@ -126,8 +125,7 @@ public class FinalProjectApplication {
 									issAPI(issFileData);
 									IssFile.newCSVFile(scan, filenamesISS, issFileData);
 
-								}
-								else if (toCSV.equals("n")){
+								} else if (toCSV.equals("n")) {
 									System.out.println("Okay, thank you.");
 								} else {
 									System.out.println("Invalid.");
@@ -144,16 +142,14 @@ public class FinalProjectApplication {
 
 								toCSV = csvMessage();
 
-
-								if (toCSV.equals("y") && !issFileData.isEmpty()) {
+								if (toCSV.equals("y") && !issWeatherFileData.isEmpty()) {
 									ISSWeatherFile.newCSVFile(scan, filenamesISSWeather, issWeatherFileData);
 
 								} else if (toCSV.equals("y") && issWeatherFileData.isEmpty()) {
 									issAPI(issFileData);
 									ISSWeatherFile.newCSVFile(scan, filenamesISSWeather, issWeatherFileData);
 
-								}
-								else if (toCSV.equals("n")){
+								} else if (toCSV.equals("n")) {
 									System.out.println("Okay, thank you.");
 								} else {
 									System.out.println("Invalid.");
@@ -171,7 +167,6 @@ public class FinalProjectApplication {
 								userInput = userInput.toUpperCase();
 								mapSizeBeforeCoin = cachedCoin.size();
 
-
 								if (cachedCoin.containsKey(userInput)) {
 									System.out.println(cachedCoin.get(userInput));
 									mapSizeAfterCoin++;
@@ -182,6 +177,7 @@ public class FinalProjectApplication {
 
 
 								if (mapSizeAfterCoin > mapSizeBeforeCoin) {
+
 									toCSV = csvMessage();
 
 									if (toCSV.equals("y") && cachedCoin.containsKey(userInput)) {
@@ -191,8 +187,7 @@ public class FinalProjectApplication {
 										cryptoPrices(userInput, cachedCoin);
 										CoinFile.newCSVFile(userInput, scan, filenamesCrypto, cachedCoin);
 
-									}
-									else if (toCSV.equals("n")){
+									} else if (toCSV.equals("n")) {
 										System.out.println("Okay, thank you.");
 									} else {
 										System.out.println("Invalid.");

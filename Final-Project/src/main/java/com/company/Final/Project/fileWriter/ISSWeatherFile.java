@@ -16,6 +16,10 @@ public class ISSWeatherFile {
     private String detail;
     private String temp;
 
+
+    // method that gets the data from UserI and converts preps it to store in file
+    // and the headers specific to this class created for file
+
     public static void getDataForFile(ISSWeatherFile userI, String fileName) {
 
         List<String> list = Arrays.asList(
@@ -42,6 +46,8 @@ public class ISSWeatherFile {
         }
     }
 
+    // method that allows user to create a csv file and name that file
+
     public static void newCSVFile(Scanner scan, HashMap<Integer, String> filenames, HashMap<Integer, ISSWeatherFile> map) {
 
         try {
@@ -60,12 +66,10 @@ public class ISSWeatherFile {
                 String choice = scan.nextLine();
 
                 if (choice.equals("y")) {
-
                     getDataForFile(map.get(1), filenames.get(1));
 
                     System.out.println("\n" + "Success.");
                 } else if (choice.equals("n")) {
-
                     System.out.println("What would you like to name your file?");
                     String newFileName = scan.nextLine();
 

@@ -7,6 +7,8 @@ import com.company.Final.Project.caching.CachedWeather;
 
 public class WeatherFile {
 
+    // method that gets the data from UserI and converts preps it to store in file
+    // and the headers specific to this class created for file
 
     public static void getDataForFile(CachedWeather userW, String fileName) {
 
@@ -53,12 +55,10 @@ public class WeatherFile {
                 String choice = scan.nextLine();
 
                 if (choice.equals("y")) {
-
                     getDataForFile(map.get(userInput), filenames.get(1));
 
                     System.out.println("\n" + "Success.");
                 } else if (choice.equals("n")) {
-
                     System.out.println("What would you like to name your file?");
                     String newFileName = scan.nextLine();
 
