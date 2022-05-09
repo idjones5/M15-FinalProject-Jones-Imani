@@ -1,24 +1,27 @@
 package com.company.Final.Project.fileWriter;
 
+import com.company.Final.Project.caching.CachedCoin;
+
 import java.io.IOException;
-import java.util.*;
-import com.company.Final.Project.caching.CachedWeather;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+public class CoinFile {
 
 
-public class WeatherFile {
+    public static void getDataForFile(CachedCoin userW, String fileName) {
 
-
-    public static void getDataForFile(CachedWeather userW, String fileName) {
+        String noCommaPrice = userW.getPrice().replaceAll(",", "");
 
         List<String> list = Arrays.asList(
-                userW.getLocation(),
-                userW.getMain(),
-                userW.getDescription(),
-                userW.getTemperature(),
-                userW.getFeelsLike()
+                userW.getSymbol(),
+                userW.getName(),
+                noCommaPrice
         );
 
-        List<String> headers = Arrays.asList("Location", "Main Weather", "Detail", "Temperature", "FeelsLike");
+        List<String> headers = Arrays.asList("Symbol", "Name", "Price (USD)");
         GeneralDataToFileMethods gm = new GeneralDataToFileMethods();
 
         gm.dataToCsv(list, headers, fileName);
@@ -34,8 +37,8 @@ public class WeatherFile {
 
     // method that allows user to create a csv file and name that file
 
-        public static void newCSVFile(String userInput, Scanner scan,
-                                      HashMap<Integer, String> filenames, HashMap<String, CachedWeather> map) {
+    public static void newCSVFile(String userInput, Scanner scan,
+                                  HashMap<Integer, String> filenames, HashMap<String, CachedCoin> map) {
 
         try {
             if (filenames.isEmpty()) {
@@ -76,5 +79,6 @@ public class WeatherFile {
                     " Please try again.");
         }
     }
+
 
 }

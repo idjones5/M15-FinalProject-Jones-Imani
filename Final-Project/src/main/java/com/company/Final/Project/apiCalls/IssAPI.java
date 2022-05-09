@@ -1,11 +1,14 @@
 package com.company.Final.Project.apiCalls;
 
 import com.company.Final.Project.exceptions.WebExceptions;
+import com.company.Final.Project.fileWriter.IssFile;
 import com.company.Final.Project.iss.SpaceResponse;
 import com.company.Final.Project.weather.WeatherResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
+
+import java.util.HashMap;
 
 import static com.company.Final.Project.iss.SpaceResponse.issSummary;
 
@@ -15,7 +18,7 @@ public class IssAPI {
     // also controls the response of a call
     // returns the coordinates, country, and city if applicable
 
-    public static void issAPI() {
+    public static void issAPI(HashMap<Integer, IssFile> map) {
 
         try {
 
@@ -23,6 +26,8 @@ public class IssAPI {
             String issLong;
             String issCountry;
             String issCity;
+
+            IssFile f = new IssFile();
 
             WebClient client = WebClient.create("http://api.open-notify.org/iss-now.json?callback");
 
@@ -56,6 +61,11 @@ public class IssAPI {
                 System.out.println("Country: The Space Station is not currently in a country.");
                 System.out.println("City: The Space Station is not currently in a city.");
                 System.out.println("===================");
+
+                f.setLatitude(issLat);
+                f.setLongitude(issLong);
+                f.setCountry("null");
+                f.setCity("null");
             } else  {
 
                 issCountry = weatherAtLocation.getSys().getCountry();
@@ -69,7 +79,15 @@ public class IssAPI {
                 System.out.println("Country: " + issCountry);
                 System.out.println("City: " + issCity);
                 System.out.println("===================");
+
+
+
+                f.setLatitude(issLat);
+                f.setLongitude(issLong);
+                f.setCountry(issCountry);
+                f.setCity(issCity);
             }
+            map.put(1, f);
         }
         catch (WebClientResponseException we) {
             WebExceptions.catchException(we);

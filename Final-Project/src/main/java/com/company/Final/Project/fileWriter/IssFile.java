@@ -2,23 +2,30 @@ package com.company.Final.Project.fileWriter;
 
 import java.io.IOException;
 import java.util.*;
-import com.company.Final.Project.caching.CachedWeather;
 
+public class IssFile {
 
-public class WeatherFile {
+    private String latitude;
+    private String longitude;
+    private String country;
+    private String city;
 
+    // method to create a new csv file
+    // this will store all the weather data from the locations the user requested
+    // this file will append the weather data to an already existing file or a new file
 
-    public static void getDataForFile(CachedWeather userW, String fileName) {
+    // data for the ISS file
+
+    public static void getDataForFile(IssFile userI, String fileName) {
 
         List<String> list = Arrays.asList(
-                userW.getLocation(),
-                userW.getMain(),
-                userW.getDescription(),
-                userW.getTemperature(),
-                userW.getFeelsLike()
+                userI.getLatitude(),
+                userI.getLongitude(),
+                userI.getCountry(),
+                userI.getCity()
         );
 
-        List<String> headers = Arrays.asList("Location", "Main Weather", "Detail", "Temperature", "FeelsLike");
+        List<String> headers = Arrays.asList("Latitude", "Longitude", "Country", "City");
         GeneralDataToFileMethods gm = new GeneralDataToFileMethods();
 
         gm.dataToCsv(list, headers, fileName);
@@ -34,15 +41,14 @@ public class WeatherFile {
 
     // method that allows user to create a csv file and name that file
 
-        public static void newCSVFile(String userInput, Scanner scan,
-                                      HashMap<Integer, String> filenames, HashMap<String, CachedWeather> map) {
+    public static void newCSVFile(Scanner scan, HashMap<Integer, String> filenames, HashMap<Integer, IssFile> map) {
 
         try {
             if (filenames.isEmpty()) {
                 System.out.println("What would you like to name your file?");
                 String filename = scan.nextLine();
 
-                getDataForFile(map.get(userInput), filename);
+                getDataForFile(map.get(1), filename);
                 filenames.put(1, filename);
 
                 System.out.println("\n" + "Success.");
@@ -54,7 +60,7 @@ public class WeatherFile {
 
                 if (choice.equals("y")) {
 
-                    getDataForFile(map.get(userInput), filenames.get(1));
+                    getDataForFile(map.get(1), filenames.get(1));
 
                     System.out.println("\n" + "Success.");
                 } else if (choice.equals("n")) {
@@ -62,7 +68,7 @@ public class WeatherFile {
                     System.out.println("What would you like to name your file?");
                     String newFileName = scan.nextLine();
 
-                    getDataForFile(map.get(userInput), newFileName);
+                    getDataForFile(map.get(1), newFileName);
                     filenames.put(1, newFileName);
 
                     System.out.println("\n" + "Success.");
@@ -76,5 +82,41 @@ public class WeatherFile {
                     " Please try again.");
         }
     }
+
+
+    // getters and setters
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 
 }

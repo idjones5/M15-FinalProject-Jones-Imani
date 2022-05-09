@@ -92,5 +92,5 @@ current location of the ISS.</p>
 
 ### Store Data to Local File
 <ol>
-<li>Allows the user to store data from the weather response if they choose to do so.</li>
+<li>Allows the user to store data from the responses if they choose to do so.</li>
 </ol>
